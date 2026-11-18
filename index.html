@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <title>Three.js test</title>
+    <style>
+        body { margin: 0; }
+        #three-canvas { width: 100vw; height: 100vh; }
+    </style>
+</head>
+<body>
+    <div id="three-canvas"></div>
+    <script type="importmap">
+        {
+            "imports":{
+                "three": "https://cdn.jsdelivr.net/npm/three@0.187.0/build/three.module.js",
+                "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.187.0/examples/jsm/"
+            }
+        }
+    </script>
+    <script type="module" src="sketch.js"></script>
+</body>
+</html>
