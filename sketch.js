@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import * as CANNON from 'cannon-es';
 import CannonDebugger from 'cannon-es-debugger';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import { EXRLoader } from 'three/addons/loaders/EXRLoader.js';
+import { RGBLoader } from 'three/addons/loaders/RGBLoader.js';
 
 // 描画先の要素
 const container = document.getElementById('three-canvas');
@@ -31,7 +31,7 @@ renderer.setPixelRatio(window.devicePixelRatio);
 container.appendChild(renderer.domElement);
 
 //環境
-new EXRLoader().load('./field', function (texture) {
+new RGBLoader().load('./field', function (texture) {
     texture.mapping = THREE.EquirectangularReflectionMapping;
     scene.background = texture;
     scene.environment = texture;
