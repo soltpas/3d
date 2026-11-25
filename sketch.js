@@ -3,7 +3,7 @@ import * as THREE from 'three';
 import * as CANNON from 'cannon-es';
 import CannonDebugger from 'cannon-es-debugger';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-import { RGBLoader } from 'three/addons/loaders/RGBLoader.js';
+import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
 
 // 描画先の要素
 const container = document.getElementById('three-canvas');
@@ -23,19 +23,23 @@ world.addBody(groundBody);
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000);
 camera.position.z = 5;
+scene.background = new THREE.Color(0x87ceeb);
 
 //レンダラー（背景透過・アンチエイリアスあり）
 const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-renderer.setSize(window.innerWidth, innerHeight);
+renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(window.devicePixelRatio);
 container.appendChild(renderer.domElement);
 
 //環境
-new RGBLoader().load('./field', function (texture) {
-    texture.mapping = THREE.EquirectangularReflectionMapping;
-    scene.background = texture;
-    scene.environment = texture;
-});
+new RGBELoader().load(
+    './field',
+    (texture) => {
+        texture.mapping = THREE.EquirectangularReflectionMapping;
+        scene.background = texture;
+        scene.environment = texture;
+    },
+);
 
 //光（平行光源と環境光）
 const dirLight = new THREE.DirectionalLight(0xffffff, 3);
